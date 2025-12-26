@@ -86,7 +86,7 @@
 
 <label for="line">Chọn tuyến vận chuyển:</label>
 <select id="line" onchange="hienDonGia(); toggleSizeInputs();">
-  <option value="tmdt">TMĐT (24.000đ/kg)</option>
+  <option value="tmdt">TMĐT (26.000đ/kg)</option>
   <option value="tieungach">Tiểu ngạch</option>
 </select>
 
@@ -123,7 +123,7 @@
 
     if (line === "tmdt") {
       loaiHangDiv.style.display = "none";
-      priceInfo.innerHTML = "Tuyến TMĐT: <strong>24.000đ/kg</strong>. Không tính theo thể tích.";
+      priceInfo.innerHTML = "Tuyến TMĐT: <strong>26.000đ/kg</strong>. Không tính theo thể tích.";
     } else {
       loaiHangDiv.style.display = "block";
       const loai = document.getElementById("loaiHang").value;
@@ -163,7 +163,7 @@
 
     if (line === "tmdt") {
       cuoc = weight * 24000;
-      chiTiet = `Tuyến TMĐT: chỉ tính theo cân nặng thực tế.<br><strong>${weight}kg × 24.000đ = ${cuoc.toLocaleString()}đ</strong>`;
+      chiTiet = `Tuyến TMĐT: chỉ tính theo cân nặng thực tế.<br><strong>${weight}kg × 26.000đ = ${cuoc.toLocaleString()}đ</strong>`;
     } else {
       const volume_m3 = (l * w * h) / 1000000;
       const loai = document.getElementById("loaiHang").value;
