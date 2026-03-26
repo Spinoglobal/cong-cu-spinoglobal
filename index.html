@@ -3,100 +3,311 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Công Cụ Tính Cước Vận Chuyển Hàng Ký Gửi Spinoglobal</title>
+  <title>Tính Cước Vận Chuyển - Spinoglobal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Arial', sans-serif;
-      background: #ffffff;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: #f5f6fa;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    .logo { text-align: center; padding: 16px 0 8px; }
+    .logo img { width: 180px; }
+    h1 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
       color: #06112e;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
       padding: 20px;
-      max-width: none;
-      margin: auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
     }
-
-    .logo {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .logo img {
-      width: 220px;
-    }
-
-    h2 {
-      text-align: center;
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
       color: #06112e;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-
+    .section-title .icon {
+      width: 20px; height: 20px;
+      background: #06112e; color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+    }
     label {
       display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      margin-bottom: 4px;
       margin-top: 12px;
     }
-
-    input {
+    label:first-of-type { margin-top: 0; }
+    select, input[type="number"] {
       width: 100%;
-      padding: 10px;
+      padding: 10px 12px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      color: #1a1a2e;
+      background: #fafafa;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: #06112e;
+      background: #fff;
+    }
+    .size-row {
+      display: flex;
+      gap: 8px;
       margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
     }
-
-    button {
-      margin-top: 20px;
+    .size-row input { flex: 1; min-width: 0; }
+    .size-note {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .btn-calc {
       width: 100%;
-      background-color: #06112e;
+      padding: 14px;
+      background: #06112e;
       color: #fff;
-      padding: 12px;
-      font-size: 16px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
     }
-
-    .result, .price-info {
-      margin-top: 20px;
-      padding: 16px;
-      background: #eaf0ff;
+    .btn-calc:hover { background: #0d1f4a; }
+    .btn-calc:active { transform: scale(0.98); }
+    .result-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
       border-left: 4px solid #06112e;
-      border-radius: 6px;
     }
+    .result-item.tmdt { border-left-color: #e74c3c; }
+    .result-item.spx { border-left-color: #ee4d2d; }
+    .result-item.vtp { border-left-color: #e5342c; }
+    .result-item.tau { border-left-color: #2c6fbb; }
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .result-name { font-size: 14px; font-weight: 600; }
+    .result-price { font-size: 16px; font-weight: 700; color: #06112e; }
+    .result-detail { font-size: 12px; color: #777; line-height: 1.5; }
+    .weight-info {
+      background: #f0f4ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .error-msg {
+      background: #fff3f3;
+      border-left: 4px solid #e74c3c;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #c0392b;
+      margin-top: 16px;
+    }
+    .total-section {
+      background: linear-gradient(135deg, #06112e 0%, #1a2a5e 100%);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 4px;
+      color: #fff;
+    }
+    .total-label { font-size: 12px; opacity: 0.7; margin-bottom: 2px; }
+    .total-price { font-size: 22px; font-weight: 700; }
+    .total-detail { font-size: 12px; opacity: 0.6; margin-top: 4px; }
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+    .results { margin-top: 16px; }
   </style>
 </head>
 <body>
 
-<div class="logo">
-  <img src="https://spinoglobal.vn/Upload/Upload/7be172a4-60ef-40fa-9a1a-39033fd53b60-Logo-06.png" alt="Spinoglobal.vn Logo">
+<div class="container">
+  <div class="logo">
+    <img src="https://spinoglobal.vn/Upload/Upload/7be172a4-60ef-40fa-9a1a-39033fd53b60-Logo-06.png" alt="Spinoglobal">
+  </div>
+
+  <h1>Tính Cước Vận Chuyển Về Tận Nhà</h1>
+  <p class="subtitle">Trung Quốc → Kho Hà Nội → Giao tận nhà bạn</p>
+
+  <div class="card">
+    <div class="section-title"><span class="icon">1</span> Thông tin hàng hoá</div>
+    <label for="weight">Cân nặng thực tế (kg)</label>
+    <input type="number" id="weight" placeholder="Ví dụ: 5" step="0.1" min="0.1" />
+    <label>Kích thước kiện hàng (cm)</label>
+    <div class="size-row">
+      <input type="number" id="length" placeholder="Dài" step="0.1" />
+      <input type="number" id="width" placeholder="Rộng" step="0.1" />
+      <input type="number" id="height" placeholder="Cao" step="0.1" />
+    </div>
+    <p class="size-note">Nhập kích thước để tính cân quy đổi chính xác hơn</p>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><span class="icon">2</span> Giao hàng nội địa</div>
+    <label for="delivery">Chọn hình thức giao hàng</label>
+    <select id="delivery">
+      <option value="none">Tự lấy tại kho Hà Nội (0đ)</option>
+      <option value="spx_noi">SPX Express - Nội tỉnh / Nội miền</option>
+      <option value="spx_lien">SPX Express - Liên miền</option>
+      <option value="vtp">Viettel Post - Toàn quốc</option>
+      <option value="tau">Gửi tàu HCM - Giao tận nhà nội thành</option>
+    </select>
+  </div>
+
+  <button class="btn-calc" onclick="tinhCuoc()">Tính cước ngay</button>
+
+  <div id="output"></div>
+
+  <div class="footer-note">
+    Giá tham khảo - liên hệ để được báo giá chính xác<br>
+    <strong>spinoglobal.vn</strong>
+  </div>
 </div>
-
-<h2>Công Cụ Tính Cước Vận Chuyển Hàng Ký Gửi Spinoglobal</h2>
-<p style="text-align:center; font-style:italic">Kho đích: Hà Nội</p>
-
-<div class="price-info">
-  Tuyến TMĐT: <strong>24.000đ/kg</strong>. Tính theo cân nặng thực tế.
-</div>
-
-<label for="weight">Cân nặng thực tế (kg):</label>
-<input type="number" id="weight" placeholder="Ví dụ: 10" step="0.1" />
-
-<button onclick="tinhCuoc()">Tính cước</button>
-
-<div class="result" id="output"></div>
 
 <script>
-  function tinhCuoc() {
-    const weight = parseFloat(document.getElementById("weight").value);
-    const output = document.getElementById("output");
+function tinhCuoc() {
+  const weightReal = parseFloat(document.getElementById('weight').value);
+  const l = parseFloat(document.getElementById('length').value);
+  const w = parseFloat(document.getElementById('width').value);
+  const h = parseFloat(document.getElementById('height').value);
+  const delivery = document.getElementById('delivery').value;
+  const output = document.getElementById('output');
 
-    if (isNaN(weight) || weight <= 0) {
-      output.innerHTML = "⚠️ Vui lòng nhập cân nặng.";
-      return;
-    }
-
-    const cuoc = weight * 24000;
-    output.innerHTML = `Tuyến TMĐT: tính theo cân nặng thực tế.<br><strong>${weight}kg × 24.000đ = ${cuoc.toLocaleString()}đ</strong>`;
+  if (isNaN(weightReal) || weightReal <= 0) {
+    output.innerHTML = '<div class="error-msg">Vui lòng nhập cân nặng thực tế.</div>';
+    return;
   }
+
+  const hasSize = !isNaN(l) && !isNaN(w) && !isNaN(h) && l > 0 && w > 0 && h > 0;
+  let wConv6000 = 0, wConv5000 = 0, volM3 = 0;
+  if (hasSize) {
+    wConv6000 = (l * w * h) / 6000;
+    wConv5000 = (l * w * h) / 5000;
+    volM3 = (l * w * h) / 1000000;
+  }
+
+  // TMĐT
+  const cuocTMDT = weightReal * 24000;
+
+  // Nội địa
+  let cuocND = 0, tenND = '', ctND = '';
+
+  if (delivery === 'none') {
+    tenND = 'Tự lấy tại kho HN';
+    ctND = 'Không phát sinh cước nội địa';
+  } else if (delivery.startsWith('spx')) {
+    const wSPX = hasSize ? Math.max(weightReal, wConv6000) : weightReal;
+    const wR = Math.ceil(wSPX * 2) / 2;
+    tenND = delivery === 'spx_noi' ? 'SPX Express (Nội tỉnh/Nội miền)' : 'SPX Express (Liên miền)';
+    if (wR <= 10) {
+      cuocND = 27000;
+    } else {
+      const steps = (wR - 10) / 0.5;
+      cuocND = 27000 + steps * (delivery === 'spx_noi' ? 2500 : 5000);
+    }
+    ctND = 'Cân tính cước: ' + wR.toFixed(1) + 'kg';
+    if (hasSize && wConv6000 > weightReal) ctND += ' (quy đổi ' + l + 'x' + w + 'x' + h + 'cm ÷6000)';
+  } else if (delivery === 'vtp') {
+    const wVTP = hasSize ? Math.max(weightReal, wConv5000) : weightReal;
+    const wR = Math.ceil(wVTP);
+    tenND = 'Viettel Post';
+    const tb = {1:25300,2:27500,3:33000,4:35200,5:37400,6:41800,7:47300,8:52800,9:59400,10:66000};
+    cuocND = wR <= 10 ? (tb[wR] || tb[1]) : 66000 + (wR - 10) * 6600;
+    ctND = 'Cân tính cước: ' + wR + 'kg';
+    if (hasSize && wConv5000 > weightReal) ctND += ' (quy đổi ' + l + 'x' + w + 'x' + h + 'cm ÷5000)';
+  } else if (delivery === 'tau') {
+    const wTau = hasSize ? Math.max(weightReal, wConv6000) : weightReal;
+    tenND = 'Gửi tàu HCM (đường sắt)';
+    const cKg = wTau * 1800;
+    const cM3 = hasSize ? volM3 * 540000 : 0;
+    cuocND = Math.max(cKg, cM3, 420000);
+    ctND = 'Theo kg: ' + Math.round(cKg).toLocaleString() + 'đ';
+    if (hasSize) ctND += ' | Theo m³: ' + Math.round(cM3).toLocaleString() + 'đ';
+    if (cuocND === 420000 && cKg < 420000 && cM3 < 420000) ctND += '<br>Áp dụng cước tối thiểu 420.000đ/lần giao';
+  }
+
+  const tong = cuocTMDT + cuocND;
+
+  let html = '<div class="results">';
+
+  if (hasSize) {
+    html += '<div class="weight-info">';
+    html += '<strong>Cân thực:</strong> ' + weightReal + 'kg';
+    html += ' &nbsp;|&nbsp; <strong>Quy đổi (÷6000):</strong> ' + wConv6000.toFixed(2) + 'kg';
+    html += ' &nbsp;|&nbsp; <strong>(÷5000):</strong> ' + wConv5000.toFixed(2) + 'kg';
+    html += '<br><strong>Kích thước:</strong> ' + l + ' × ' + w + ' × ' + h + ' cm';
+    html += '</div>';
+  }
+
+  html += '<div class="result-item tmdt">';
+  html += '<div class="result-header"><span class="result-name">Cước TQ → Kho HN</span>';
+  html += '<span class="result-price">' + cuocTMDT.toLocaleString() + 'đ</span></div>';
+  html += '<div class="result-detail">TMĐT: ' + weightReal + 'kg × 24.000đ/kg</div></div>';
+
+  const cls = delivery.startsWith('spx') ? 'spx' : delivery === 'vtp' ? 'vtp' : delivery === 'tau' ? 'tau' : '';
+  html += '<div class="result-item ' + cls + '">';
+  html += '<div class="result-header"><span class="result-name">' + tenND + '</span>';
+  html += '<span class="result-price">' + cuocND.toLocaleString() + 'đ</span></div>';
+  html += '<div class="result-detail">' + ctND + '</div></div>';
+
+  html += '<div class="total-section">';
+  html += '<div class="total-label">Tổng cước về tận nhà</div>';
+  html += '<div class="total-price">' + tong.toLocaleString() + 'đ</div>';
+  html += '<div class="total-detail">TMĐT ' + cuocTMDT.toLocaleString() + 'đ + Nội địa ' + cuocND.toLocaleString() + 'đ</div>';
+  html += '</div></div>';
+
+  output.innerHTML = html;
+}
 </script>
 
 </body>
