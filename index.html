@@ -7,166 +7,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background: #f5f6fa;
-      color: #1a1a2e;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
-    }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: #f5f6fa; color: #1a1a2e; min-height: 100vh; }
+    .container { max-width: 520px; margin: 0 auto; padding: 20px 16px 40px; }
     .logo { text-align: center; padding: 16px 0 8px; }
     .logo img { width: 180px; }
-    h1 {
-      text-align: center;
-      font-size: 20px;
-      font-weight: 700;
-      color: #06112e;
-      margin-bottom: 4px;
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 20px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      margin-bottom: 16px;
-    }
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #06112e;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .section-title .icon {
-      width: 20px; height: 20px;
-      background: #06112e; color: #fff;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700;
-    }
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 500;
-      color: #444;
-      margin-bottom: 4px;
-      margin-top: 12px;
-    }
+    h1 { text-align: center; font-size: 20px; font-weight: 700; color: #06112e; margin-bottom: 4px; }
+    .subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+    .section-title { font-size: 14px; font-weight: 600; color: #06112e; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .section-title .icon { width: 20px; height: 20px; background: #06112e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+    label { display: block; font-size: 13px; font-weight: 500; color: #444; margin-bottom: 4px; margin-top: 12px; }
     label:first-of-type { margin-top: 0; }
-    select, input[type="number"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1.5px solid #e0e0e0;
-      border-radius: 8px;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: 14px;
-      color: #1a1a2e;
-      background: #fafafa;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-    select:focus, input:focus {
-      outline: none;
-      border-color: #06112e;
-      background: #fff;
-    }
-    .size-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 4px;
-    }
+    input[type="number"] { width: 100%; padding: 10px 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #1a1a2e; background: #fafafa; transition: border-color 0.2s; -webkit-appearance: none; }
+    input:focus { outline: none; border-color: #06112e; background: #fff; }
+    .size-row { display: flex; gap: 8px; margin-top: 4px; }
     .size-row input { flex: 1; min-width: 0; }
-    .size-note {
-      font-size: 11px;
-      color: #999;
-      margin-top: 4px;
-      font-style: italic;
-    }
-    .btn-calc {
-      width: 100%;
-      padding: 14px;
-      background: #06112e;
-      color: #fff;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 8px;
-    }
+    .size-note { font-size: 11px; color: #999; margin-top: 4px; font-style: italic; }
+    .btn-calc { width: 100%; padding: 14px; background: #06112e; color: #fff; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 8px; }
     .btn-calc:hover { background: #0d1f4a; }
     .btn-calc:active { transform: scale(0.98); }
-    .result-item {
-      background: #fff;
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-      border-left: 4px solid #06112e;
-    }
-    .result-item.tmdt { border-left-color: #e74c3c; }
-    .result-item.spx { border-left-color: #ee4d2d; }
-    .result-item.vtp { border-left-color: #e5342c; }
-    .result-item.tau { border-left-color: #2c6fbb; }
-    .result-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-    .result-name { font-size: 14px; font-weight: 600; }
-    .result-price { font-size: 16px; font-weight: 700; color: #06112e; }
-    .result-detail { font-size: 12px; color: #777; line-height: 1.5; }
-    .weight-info {
-      background: #f0f4ff;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      font-size: 12px;
-      color: #555;
-      line-height: 1.6;
-    }
-    .error-msg {
-      background: #fff3f3;
-      border-left: 4px solid #e74c3c;
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 13px;
-      color: #c0392b;
-      margin-top: 16px;
-    }
-    .total-section {
-      background: linear-gradient(135deg, #06112e 0%, #1a2a5e 100%);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 4px;
-      color: #fff;
-    }
-    .total-label { font-size: 12px; opacity: 0.7; margin-bottom: 2px; }
-    .total-price { font-size: 22px; font-weight: 700; }
-    .total-detail { font-size: 12px; opacity: 0.6; margin-top: 4px; }
-    .footer-note {
-      text-align: center;
-      font-size: 11px;
-      color: #aaa;
-      margin-top: 24px;
-      line-height: 1.6;
-    }
+    .weight-info { background: #f0f4ff; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: #555; line-height: 1.6; }
+    .error-msg { background: #fff3f3; border-left: 4px solid #e74c3c; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #c0392b; margin-top: 16px; }
     .results { margin-top: 16px; }
+
+    /* Đề xuất rẻ nhất */
+    .best-section { background: linear-gradient(135deg, #06112e 0%, #1a2a5e 100%); border-radius: 12px; padding: 18px; margin-bottom: 14px; color: #fff; position: relative; }
+    .best-badge { display: inline-block; background: #27c56a; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+    .best-name { font-size: 14px; font-weight: 600; opacity: .9; }
+    .best-price { font-size: 26px; font-weight: 700; margin: 2px 0; }
+    .best-breakdown { margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 8px; }
+    .bd-row { display: flex; justify-content: space-between; font-size: 12.5px; padding: 3px 0; }
+    .bd-row span { opacity: .75; }
+    .bd-row b { font-weight: 600; }
+
+    /* Bảng 3 bên */
+    .table-title { font-size: 13px; font-weight: 600; color: #06112e; margin: 4px 0 8px; }
+    .ship-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.05); font-size: 13px; }
+    .ship-table th { background: #06112e; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; }
+    .ship-table td { padding: 11px 12px; border-bottom: 1px solid #f0f0f0; }
+    .ship-table td:nth-child(2), .ship-table td:nth-child(3) { text-align: right; white-space: nowrap; }
+    .ship-table tr:last-child td { border-bottom: none; }
+    .ship-table tr.best td { background: #eafaf0; font-weight: 600; }
+    .ship-table tr.best td:last-child { color: #0a7d3c; }
+    .ship-table .tag { background: #27c56a; color: #fff; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+    .ship-table .sub { font-size: 10px; color: #999; display: block; }
+    .ship-table th, .ship-table td { font-size: 12px; padding: 9px 8px; }
+    .table-foot { font-size: 11px; color: #999; margin-top: 8px; font-style: italic; text-align: center; }
+
+    .footer-note { text-align: center; font-size: 11px; color: #aaa; margin-top: 24px; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -183,25 +71,13 @@
     <div class="section-title"><span class="icon">1</span> Thông tin hàng hoá</div>
     <label for="weight">Cân nặng thực tế (kg)</label>
     <input type="number" id="weight" placeholder="Ví dụ: 5" step="0.1" min="0.1" />
-    <label>Kích thước kiện hàng (cm)</label>
+    <label>Kích thước kiện hàng (cm) <span style="font-weight:400;color:#999;">- cho gửi tàu</span></label>
     <div class="size-row">
       <input type="number" id="length" placeholder="Dài" step="0.1" />
       <input type="number" id="width" placeholder="Rộng" step="0.1" />
       <input type="number" id="height" placeholder="Cao" step="0.1" />
     </div>
-    <p class="size-note">Nhập kích thước để tính cân quy đổi cho đơn vị vận chuyển nội địa chính xác hơn</p>
-  </div>
-
-  <div class="card">
-    <div class="section-title"><span class="icon">2</span> Giao hàng nội địa VN</div>
-    <label for="delivery">Chọn hình thức giao hàng</label>
-    <select id="delivery">
-      <option value="none">Tự lấy tại kho Hà Nội (0đ)</option>
-      <option value="spx_noi">SPX Express - Nội tỉnh / Nội miền</option>
-      <option value="spx_lien">SPX Express - Liên miền</option>
-      <option value="vtp">Viettel Post - Toàn quốc</option>
-      <option value="tau">Gửi tàu HCM - Giao tận nhà nội thành</option>
-    </select>
+    <p class="size-note">Kích thước dùng để tính cước gửi tàu theo m³ (hàng nhẹ cồng kềnh)</p>
   </div>
 
   <button class="btn-calc" onclick="tinhCuoc()">Tính cước ngay</button>
@@ -215,97 +91,108 @@
 </div>
 
 <script>
+var fmt = function(n){ return Math.round(n).toLocaleString('vi-VN'); };
+
+// ===== Biểu giá nội địa (cập nhật 11/2026) - tính theo CÂN QUY ĐỔI =====
+function cuocVTP(w){
+  // Viettel Post - w là cân tính cước (đã quy đổi ÷5000)
+  if (w <= 3) return 24000;
+  if (w <= 5) return 31000;
+  if (w <= 10) return 50000;
+  if (w <= 15) return 75000;
+  return 75000 + Math.ceil(w - 15) * 6000;
+}
+function cuocSPX(w){
+  // SPX - w là cân tính cước (đã quy đổi ÷6000), làm tròn lên 0.5kg
+  var wR = Math.ceil(w * 2) / 2;
+  if (wR <= 10) return 27000;
+  return 27000 + Math.ceil((wR - 10) / 0.5) * 5000;
+}
+function cuocTau(w, volM3, hasSize){
+  // max(kg x 1.750, m3 x 525.000), tối thiểu 395k
+  var cKg = w * 1750;
+  var cM3 = hasSize ? volM3 * 525000 : 0;
+  return Math.max(cKg, cM3, 395000);
+}
+
 function tinhCuoc() {
-  const weightReal = parseFloat(document.getElementById('weight').value);
-  const l = parseFloat(document.getElementById('length').value);
-  const w = parseFloat(document.getElementById('width').value);
-  const h = parseFloat(document.getElementById('height').value);
-  const delivery = document.getElementById('delivery').value;
-  const output = document.getElementById('output');
+  var weightReal = parseFloat(document.getElementById('weight').value);
+  var l = parseFloat(document.getElementById('length').value);
+  var w = parseFloat(document.getElementById('width').value);
+  var h = parseFloat(document.getElementById('height').value);
+  var output = document.getElementById('output');
 
   if (isNaN(weightReal) || weightReal <= 0) {
     output.innerHTML = '<div class="error-msg">Vui lòng nhập cân nặng thực tế.</div>';
     return;
   }
 
-  const hasSize = !isNaN(l) && !isNaN(w) && !isNaN(h) && l > 0 && w > 0 && h > 0;
-  let wConv6000 = 0, wConv5000 = 0, volM3 = 0;
+  var hasSize = !isNaN(l) && !isNaN(w) && !isNaN(h) && l > 0 && w > 0 && h > 0;
+  var volM3 = hasSize ? (l * w * h) / 1000000 : 0;
+  var conv5000 = hasSize ? (l * w * h) / 5000 : 0; // quy đổi Viettel
+  var conv6000 = hasSize ? (l * w * h) / 6000 : 0; // quy đổi SPX
+
+  // Cân tính cước nội địa = max(cân thực, cân quy đổi)
+  var wVTP = hasSize ? Math.max(weightReal, conv5000) : weightReal;
+  var wSPX = hasSize ? Math.max(weightReal, conv6000) : weightReal;
+  var wTau = hasSize ? Math.max(weightReal, conv6000) : weightReal;
+
+  // Cước quốc tế TMĐT - tính theo CÂN THỰC
+  var cuocTMDT = weightReal * 24000;
+
+  // Tính cả 3 bên (nội địa theo cân quy đổi)
+  var options = [
+    { name: 'Viettel Post', detail: 'Toàn quốc', nd: cuocVTP(wVTP), ck: wVTP, hs: '÷5000' },
+    { name: 'SPX Express', detail: 'Toàn quốc', nd: cuocSPX(wSPX), ck: Math.ceil(wSPX * 2) / 2, hs: '÷6000' },
+    { name: 'Gửi tàu HCM', detail: 'Giao tận nhà nội thành', nd: cuocTau(wTau, volM3, hasSize), ck: wTau, hs: 'm³' }
+  ];
+  options.forEach(function(o){ o.tong = cuocTMDT + o.nd; });
+  options.sort(function(a,b){ return a.nd - b.nd; });
+
+  var best = options[0];
+
+  var html = '<div class="results">';
+
+  // thông tin cân
+  html += '<div class="weight-info">';
+  html += '<strong>Cân thực:</strong> ' + weightReal + 'kg';
   if (hasSize) {
-    wConv6000 = (l * w * h) / 6000;
-    wConv5000 = (l * w * h) / 5000;
-    volM3 = (l * w * h) / 1000000;
+    html += ' &nbsp;|&nbsp; <strong>KT:</strong> ' + l + '×' + w + '×' + h + ' cm';
+    html += '<br><strong>Cân quy đổi:</strong> VTP (÷5000) ' + conv5000.toFixed(2) + 'kg &nbsp;|&nbsp; SPX (÷6000) ' + conv6000.toFixed(2) + 'kg &nbsp;|&nbsp; Tàu ' + volM3.toFixed(3) + ' m³';
   }
+  html += '<br><strong>Cước quốc tế (TMĐT):</strong> ' + weightReal + 'kg thực × 24.000 = ' + fmt(cuocTMDT) + 'đ';
+  html += '</div>';
 
-  // TMĐT
-  const cuocTMDT = weightReal * 24000;
-
-  // Nội địa
-  let cuocND = 0, tenND = '', ctND = '';
-
-  if (delivery === 'none') {
-    tenND = 'Tự lấy tại kho HN';
-    ctND = 'Không phát sinh cước nội địa';
-  } else if (delivery.startsWith('spx')) {
-    const wSPX = hasSize ? Math.max(weightReal, wConv6000) : weightReal;
-    const wR = Math.ceil(wSPX * 2) / 2;
-    tenND = delivery === 'spx_noi' ? 'SPX Express (Nội tỉnh/Nội miền)' : 'SPX Express (Liên miền)';
-    if (wR <= 10) {
-      cuocND = 27000;
-    } else {
-      const steps = (wR - 10) / 0.5;
-      cuocND = 27000 + steps * (delivery === 'spx_noi' ? 2500 : 5000);
-    }
-    ctND = 'Cân tính cước: ' + wR.toFixed(1) + 'kg';
-    if (hasSize && wConv6000 > weightReal) ctND += ' (quy đổi ' + l + 'x' + w + 'x' + h + 'cm ÷6000)';
-  } else if (delivery === 'vtp') {
-    const wVTP = hasSize ? Math.max(weightReal, wConv5000) : weightReal;
-    const wR = Math.ceil(wVTP);
-    tenND = 'Viettel Post';
-    const tb = {1:25300,2:27500,3:33000,4:35200,5:37400,6:41800,7:47300,8:52800,9:59400,10:66000};
-    cuocND = wR <= 10 ? (tb[wR] || tb[1]) : 66000 + (wR - 10) * 6600;
-    ctND = 'Cân tính cước: ' + wR + 'kg';
-    if (hasSize && wConv5000 > weightReal) ctND += ' (quy đổi ' + l + 'x' + w + 'x' + h + 'cm ÷5000)';
-  } else if (delivery === 'tau') {
-    const wTau = hasSize ? Math.max(weightReal, wConv6000) : weightReal;
-    tenND = 'Gửi tàu HCM (đường sắt)';
-    const cKg = wTau * 1800;
-    const cM3 = hasSize ? volM3 * 540000 : 0;
-    cuocND = Math.max(cKg, cM3, 420000);
-    ctND = 'Theo kg: ' + Math.round(cKg).toLocaleString() + 'đ';
-    if (hasSize) ctND += ' | Theo m³: ' + Math.round(cM3).toLocaleString() + 'đ';
-    if (cuocND === 420000 && cKg < 420000 && cM3 < 420000) ctND += '<br>Áp dụng cước tối thiểu 420.000đ/lần giao';
-  }
-
-  const tong = cuocTMDT + cuocND;
-
-  let html = '<div class="results">';
-
-  if (hasSize) {
-    html += '<div class="weight-info">';
-    html += '<strong>Cân thực:</strong> ' + weightReal + 'kg';
-    html += ' &nbsp;|&nbsp; <strong>Quy đổi (÷6000):</strong> ' + wConv6000.toFixed(2) + 'kg';
-    html += ' &nbsp;|&nbsp; <strong>(÷5000):</strong> ' + wConv5000.toFixed(2) + 'kg';
-    html += '<br><strong>Kích thước:</strong> ' + l + ' × ' + w + ' × ' + h + ' cm';
-    html += '</div>';
-  }
-
-  html += '<div class="result-item tmdt">';
-  html += '<div class="result-header"><span class="result-name">Cước TQ → Kho HN</span>';
-  html += '<span class="result-price">' + cuocTMDT.toLocaleString() + 'đ</span></div>';
-  html += '<div class="result-detail">TMĐT: ' + weightReal + 'kg × 24.000đ/kg</div></div>';
-
-  const cls = delivery.startsWith('spx') ? 'spx' : delivery === 'vtp' ? 'vtp' : delivery === 'tau' ? 'tau' : '';
-  html += '<div class="result-item ' + cls + '">';
-  html += '<div class="result-header"><span class="result-name">' + tenND + '</span>';
-  html += '<span class="result-price">' + cuocND.toLocaleString() + 'đ</span></div>';
-  html += '<div class="result-detail">' + ctND + '</div></div>';
-
-  html += '<div class="total-section">';
-  html += '<div class="total-label">Tổng cước về tận nhà</div>';
-  html += '<div class="total-price">' + tong.toLocaleString() + 'đ</div>';
-  html += '<div class="total-detail">TMĐT ' + cuocTMDT.toLocaleString() + 'đ + Nội địa ' + cuocND.toLocaleString() + 'đ</div>';
+  // đề xuất rẻ nhất
+  html += '<div class="best-section">';
+  html += '<div class="best-badge">RẺ NHẤT - ĐỀ XUẤT</div>';
+  html += '<div class="best-name">' + best.name + ' · về tận nhà</div>';
+  html += '<div class="best-price">' + fmt(best.tong) + 'đ</div>';
+  html += '<div class="best-breakdown">';
+  html += '<div class="bd-row"><span>Cước quốc tế (TQ → Kho HN)</span><b>' + fmt(cuocTMDT) + 'đ</b></div>';
+  html += '<div class="bd-row"><span>Cước nội địa VN (' + best.name + ')</span><b>' + fmt(best.nd) + 'đ</b></div>';
   html += '</div></div>';
 
+  // bảng 3 bên tham khảo - tách rõ quốc tế + nội địa
+  html += '<div class="table-title">Bảng giá 3 bên tham khảo</div>';
+  html += '<table class="ship-table"><thead><tr><th>Hình thức</th><th>Quốc tế</th><th>Nội địa VN</th><th>Tổng</th></tr></thead><tbody>';
+  options.forEach(function(o, i){
+    var cls = i === 0 ? ' class="best"' : '';
+    var tag = i === 0 ? '<span class="tag">RẺ NHẤT</span>' : '';
+    html += '<tr' + cls + '>';
+    html += '<td>' + o.name + tag + '<span class="sub">Cân cước: ' + (o.hs === 'm³' ? o.ck.toFixed(1) : o.ck) + 'kg ' + o.hs + '</span></td>';
+    html += '<td>' + fmt(cuocTMDT) + 'đ</td>';
+    html += '<td>' + fmt(o.nd) + 'đ</td>';
+    html += '<td>' + fmt(o.tong) + 'đ</td>';
+    html += '</tr>';
+  });
+  // mục tự lấy tại kho - chỉ cước quốc tế, không ship nội địa
+  html += '<tr><td>Tự lấy tại kho HN<span class="sub">Tự đến lấy, không ship</span></td>';
+  html += '<td>' + fmt(cuocTMDT) + 'đ</td><td>0đ</td><td>' + fmt(cuocTMDT) + 'đ</td></tr>';
+  html += '</tbody></table>';
+  html += '<p class="table-foot">Tổng = Cước quốc tế (24.000đ/kg thực) + Cước nội địa VN</p>';
+
+  html += '</div>';
   output.innerHTML = html;
 }
 </script>
